@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>La liste des cadeaux</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<h1>To-do list du père noël</h1>
+
+<table border="1">
+    <tr>
+        <th>N°</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Adresse</th>
+        <th>Cadeau</th>
+        <th>Statut</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="t : ${listTodos}">
+        <td th:utext="${t.id}">N°</td>
+        <td th:utext="${t.titre}">Titre</td>
+        <td th:utext="${t.description}">Description</td>
+        <td th:utext="${t.adresse}">Adresse</td>
+        <td th:utext="${t.cadeau}">Cadeau</td>
+        <div>
+            <td th:if="${t.checkin}">
+                <input type="checkbox" checked disabled />
+            </td>
+            <td th:unless="${t.checkin}">
+                <input type="checkbox" disabled />
+            </td>
+        </div>
+        <td>
+            <a th:href="@{/aboutTodo/{id}(id=${t.id})}"><button>Modifier</button></a>
+            <a th:href="@{/deleteTodo/{id}(id=${t.id})}"><button>Supprimer</button></a>
+        </td>
+
+    </tr>
+</table>
+</br>
+<a href="/createTodo"><button>Créer une nouvelle tâche</button></a>
+
+</body>
+</html>

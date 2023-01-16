@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>A propos de ce todo</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div id="box">
+    <h1>Modifier la tâche n°<p th:text="${todo.id}"/></h1>
+    <form th:action="@{/updateTodo/{id}(id=${todo.id})}" th:object="${form}" method="post">
+        <label for="title">Titre :</label>
+        <input type="text" id="title" th:value="${todo.titre}" name="titre" required/> </br>
+
+        <label for="description">Description :</label><br>
+        <textarea id="description" th:text="${todo.description}" name="description" rows="5" cols="33"></textarea>
+        </br>
+
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" th:value="${todo.adresse}" name="adresse" required/> </br>
+
+        <label for="cadeau">Cadeau</label>
+        <input type="text" id="cadeau" th:value="${todo.cadeau}" name="cadeau" required/> </br>
+
+        <div>
+        <p th:if="${todo.checkin}">
+            <label for="statutT">Statut :</label>
+            <input type="checkbox" id="statutT" name="checkin" checked />
+        </p>
+        <p th:unless="${todo.checkin}">
+            <label for="statutF">Statut</label>
+            <input type="checkbox" id="statutF" name="checkin" />
+        </p>
+        </div>
+
+        <input type="submit" value="Modifier" />
+    </form>
+    <a href="/"><button>Retour</button></a>
+</div>
+
+</body>
+</html>
